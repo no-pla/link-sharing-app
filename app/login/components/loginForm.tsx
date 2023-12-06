@@ -4,9 +4,10 @@ import React from "react";
 import Input from "@/app/components/input";
 import EmailURL from "@/public/images/icon-email.svg";
 import PasswordURL from "@/public/images/icon-password.svg";
-import Button from "@/app/components/button";
+import PrimaryButton from "@/app/components/primaryButton";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
+import { emailRegex, passwordRegex } from "@/utils/utils";
 
 interface LogInInfo {
   email: string;
@@ -19,7 +20,7 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const onLogin = ({ email, password }: LogInInfo) => {
@@ -39,14 +40,34 @@ const LoginForm = () => {
           iconURL={EmailURL}
           placeholder="e.g alex@email.com"
           inputType="email"
+          validation={{
+            pattern: {
+              value: emailRegex,
+              message: "Please check again",
+            },
+            required: {
+              value: true,
+              message: "Can't be empty",
+            },
+          }}
         />
         <Input
           label="Password"
           iconURL={PasswordURL}
           placeholder="Enter your password"
           inputType="password"
+          validation={{
+            pattern: {
+              value: passwordRegex,
+              message: "Please check again",
+            },
+            required: {
+              value: true,
+              message: "Can't be empty",
+            },
+          }}
         />
-        <Button text="Login" />
+        <PrimaryButton text="Login" />
         <div className="flex gap-1 justify-center">
           <p>Don&apos;t have an account?</p>
           <Link href="/register" className="text-purple">
