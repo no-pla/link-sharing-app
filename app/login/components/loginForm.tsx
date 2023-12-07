@@ -37,6 +37,7 @@ const LoginForm = () => {
       >
         <Input
           label="Email address"
+          id="email"
           iconURL={EmailURL}
           placeholder="e.g alex@email.com"
           inputType="email"
@@ -53,6 +54,7 @@ const LoginForm = () => {
         />
         <Input
           label="Password"
+          id="password"
           iconURL={PasswordURL}
           placeholder="Enter your password"
           inputType="password"
@@ -69,7 +71,7 @@ const LoginForm = () => {
         />
         <PrimaryButton text="Login" />
         <div className="flex gap-1 justify-center">
-          <p>Don&apos;t have an account?</p>
+          <p className="text-grey">Don&apos;t have an account?</p>
           <Link href="/register" className="text-purple">
             Create account
           </Link>

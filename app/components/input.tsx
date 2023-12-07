@@ -8,6 +8,7 @@ interface InputInfo {
   placeholder: string;
   inputType: string;
   validation?: any;
+  id: string;
 }
 
 const Input = ({
@@ -16,17 +17,20 @@ const Input = ({
   placeholder,
   inputType,
   validation,
+  id,
 }: InputInfo) => {
   const {
     register,
     formState: { errors },
   } = useFormContext<any>();
-  const error = errors[inputType];
+  const error = errors[id];
+
+  console.log(errors);
 
   return (
     <div className="flex flex-col relative">
       <label
-        htmlFor={inputType}
+        htmlFor={id}
         className={`mb-[4px] ${error ? "text-red" : "text-darkGrey"} text-xs`}
       >
         {label}
@@ -35,17 +39,17 @@ const Input = ({
         src={iconURL}
         width={16}
         height={16}
-        alt=""
+        alt="icon"
         className="absolute top-[38px] left-[16px]"
       />
       <input
-        id={inputType}
+        id={id}
         type={inputType}
         placeholder={placeholder}
         className={`rounded-[8px] border focus:border-purple focus:shadow-inputShadow ${
           error ? "border-red" : "border-border"
         }  pl-[44px] pr-[16px] py-[12px]`}
-        {...register(inputType, validation)}
+        {...register(id, validation)}
       />
       <p className="absolute top-[36px] right-[16px] text-[12px] text-red">
         {error && error?.message?.toString()}
